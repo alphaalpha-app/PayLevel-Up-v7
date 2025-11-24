@@ -9,6 +9,9 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      // Set base to './' so that assets are loaded relatively. 
+      // This is required for GitHub Pages or any subdirectory deployment.
+      base: './',
       server: {
         port: 3000,
         host: '0.0.0.0',

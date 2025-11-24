@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { WorkLog, UserSettings, Job } from '../types';
+import { WorkLog, UserSettings, Job, generateUUID } from '../types';
 import { FileCheck, Calendar, Calculator, AlertTriangle, CheckCircle, PlusCircle, MinusCircle, Percent, Briefcase, Trash2, Plus, Save, Tag } from 'lucide-react';
 
 interface PayslipVerifierProps {
@@ -47,7 +47,7 @@ export const PayslipVerifier: React.FC<PayslipVerifierProps> = ({ logs, settings
 
   const addAdjustment = (category = 'General', name = '') => {
       setAdjustments([...adjustments, { 
-          id: crypto.randomUUID(), 
+          id: generateUUID(), 
           category, 
           name: name || '', 
           hours: '', 
@@ -88,7 +88,7 @@ export const PayslipVerifier: React.FC<PayslipVerifierProps> = ({ logs, settings
 
     if (window.confirm(`確定將 "${noteText}" 的 ${adj.hours} 小時加入工時紀錄嗎？\n這將累積到您的加薪進度中。`)) {
         onAddLog({
-            id: crypto.randomUUID(),
+            id: generateUUID(),
             jobId: effectiveJobId,
             date: endDate, // Use period end date
             startTime: '-',
@@ -156,7 +156,7 @@ export const PayslipVerifier: React.FC<PayslipVerifierProps> = ({ logs, settings
     if (Math.abs(diff) <= 0) return;
 
     const newLog: WorkLog = {
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         jobId: effectiveJobId,
         date: endDate,
         startTime: '-',

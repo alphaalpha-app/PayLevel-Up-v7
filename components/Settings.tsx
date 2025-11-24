@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { UserSettings, Job, DEFAULT_JOB } from '../types';
+import { UserSettings, Job, DEFAULT_JOB, generateUUID } from '../types';
 import { Briefcase, Calculator, Edit3, Plus, Trash2, Palette, Moon, Sun, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -153,7 +153,7 @@ export const Settings: React.FC<SettingsProps> = ({ settings, onUpdateSettings, 
   const handleAddNewJob = () => {
       const newJob: Job = {
           ...DEFAULT_JOB,
-          id: crypto.randomUUID(),
+          id: generateUUID(),
           name: `Job ${jobs.length + 1}`,
           color: COLORS[jobs.length % COLORS.length]
       };

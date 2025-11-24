@@ -73,3 +73,19 @@ export const DEFAULT_JOB: Job = {
   nextHourlyRate: 70,
   nextWeekendHourlyRate: 70,
 };
+
+// Utility to generate UUIDs safely in all environments (including older iOS/insecure contexts)
+export function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    try {
+      return crypto.randomUUID();
+    } catch (e) {
+      // Fallback if randomUUID fails (e.g. insecure context)
+    }
+  }
+  // Fallback implementation (RFC4122)
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}

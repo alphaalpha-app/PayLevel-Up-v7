@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
-import { DEFAULT_SETTINGS, DEFAULT_JOB, WorkLog, UserSettings, AppState, Job, ShiftTemplate } from './types';
+import { DEFAULT_SETTINGS, DEFAULT_JOB, WorkLog, UserSettings, AppState, Job, ShiftTemplate, generateUUID } from './types';
 import { Dashboard } from './components/Dashboard';
 import { WorkLogger } from './components/WorkLogger';
 import { Settings } from './components/Settings';
@@ -40,7 +41,7 @@ const App: React.FC = () => {
            const oldSettings = parsed.settings as UserSettings;
            const mainJob: Job = {
              ...DEFAULT_JOB,
-             id: crypto.randomUUID(),
+             id: generateUUID(),
              name: 'Main Job',
              hourlyRate: oldSettings.hourlyRate || DEFAULT_JOB.hourlyRate,
              weekendHourlyRate: oldSettings.weekendHourlyRate || oldSettings.hourlyRate || DEFAULT_JOB.weekendHourlyRate,
@@ -72,7 +73,7 @@ const App: React.FC = () => {
       }
     } else {
         // New user
-        const initialJob = { ...DEFAULT_JOB, id: crypto.randomUUID() };
+        const initialJob = { ...DEFAULT_JOB, id: generateUUID() };
         setJobs([initialJob]);
     }
     setIsLoaded(true);
@@ -146,7 +147,7 @@ const App: React.FC = () => {
            const oldSettings = data.settings as UserSettings;
            const mainJob: Job = {
              ...DEFAULT_JOB,
-             id: crypto.randomUUID(),
+             id: generateUUID(),
              hourlyRate: oldSettings.hourlyRate || DEFAULT_JOB.hourlyRate,
              weekendHourlyRate: oldSettings.weekendHourlyRate || oldSettings.hourlyRate || DEFAULT_JOB.weekendHourlyRate,
            };

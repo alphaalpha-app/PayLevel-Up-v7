@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { WorkLog, Job, ShiftTemplate } from '../types';
+import { WorkLog, Job, ShiftTemplate, generateUUID } from '../types';
 import { Plus, Trash2, Calendar, Clock, FileText, Save, Timer, Tag, Briefcase, Bookmark, X, Check, ArrowRight } from 'lucide-react';
 
 interface WorkLoggerProps {
@@ -75,7 +75,7 @@ export const WorkLogger: React.FC<WorkLoggerProps> = ({ logs, jobs, onAddLog, on
       }
 
       const newLog: WorkLog = {
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         jobId: effectiveJobId,
         date,
         startTime: finalStart,
@@ -101,7 +101,7 @@ export const WorkLogger: React.FC<WorkLoggerProps> = ({ logs, jobs, onAddLog, on
       if (!newTemplateName.trim()) return;
       
       const newTemplate: ShiftTemplate = {
-          id: crypto.randomUUID(),
+          id: generateUUID(),
           name: newTemplateName,
           jobId: effectiveJobId,
           startTime,
